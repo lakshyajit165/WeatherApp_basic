@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             try {
+                //unicode for degree
+                final String DEGREE  = "\u00b0";
                 JSONObject jsonObject = new JSONObject(s);
 
                 String weatherInfo = jsonObject.getString("weather");
@@ -97,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray arr = new JSONArray(weatherInfo);
 
                 String message = "";
+                //for temperature
+                JSONObject jsonObject1 = jsonObject.getJSONObject("main");
+                JSONObject jsonObject2 = jsonObject.getJSONObject("wind");
+
+                String temp = jsonObject1.getString("temp");
+                String humid = jsonObject1.getString("humidity");
+                String wind = jsonObject2.getString("speed");
 
                 for (int i=0; i < arr.length(); i++) {
                     JSONObject jsonPart = arr.getJSONObject(i);
@@ -105,9 +114,12 @@ public class MainActivity extends AppCompatActivity {
                     String description = jsonPart.getString("description");
 
                     if (!main.equals("") && !description.equals("")) {
-                        message += main + ": " + description + "\r\n";
+                        message += main + ": " + description + "\n\n";
                     }
                 }
+                message += "Temperature: "+ temp + DEGREE+"C" + "\n\n" + "Humidity: "+ humid+
+                "%"+"\n\n"+"Windspeed: "+wind+"m/s";
+
 
                 if (!message.equals("")) {
                     resultTextView.setText(message);
