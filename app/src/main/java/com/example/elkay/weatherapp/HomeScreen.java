@@ -1,5 +1,6 @@
 package com.example.elkay.weatherapp;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,10 @@ public class HomeScreen extends AppCompatActivity {
             }
 
             Intent intent = new Intent(HomeScreen.this, MainActivity.class);
+
             startActivity(intent);
+
+
 
             HomeScreen.this.finish();
         }
